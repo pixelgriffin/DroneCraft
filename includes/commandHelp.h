@@ -32,6 +32,9 @@ Gather* createGatherForEntAndMineral(SCVehicle *scv, Entity *resource);
 PotentialMove *createPotentialMoveForEnt(Entity *ent, Ogre::Vector3 pos);
 Potential3DMove *createPotential3DMoveForEnt(Entity* ent, Ogre::Vector3 pos);
 
+Maintain* createMaintainForEnt(Entity* ent, Entity* enemy);
+void setMaintainForEnt(Entity* ent, Entity* enemy);
+
 void  setMoveForEnt(Entity* ent, Ogre::Vector3 pos);
 void  addMoveForEnt(Entity* ent, Ogre::Vector3 pos);
 
