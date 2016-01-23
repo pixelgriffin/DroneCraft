@@ -57,6 +57,9 @@ MicroAspect::MicroAspect(Entity* u, SquadMgr* s, Side side){
 Entity* MicroAspect::getTarget(std::set<Entity*> &enemies){
 	Entity* t = getNearestUnit(enemies);
 	std::set<Entity*> nearbyunits;
+	if(t == NULL)
+		return NULL;
+
 	for(int i=0;i<t->engine->entityMgr->nEnts;i++){
 		if(t->engine->entityMgr->ents[i]->entityId.side == this->side) continue;
 		else if(t->engine->entityMgr->ents[i]->entityState != ALIVE) continue;
@@ -85,7 +88,7 @@ Entity* MicroAspect::getTarget(std::set<Entity*> &enemies){
 
 Entity* MicroAspect::getNearestUnit(std::set<Entity*> &enemies){
 	double minDist = 100000;
-	Entity* t;
+	Entity* t = NULL;
 	//calculate all the distances
 	for (set<Entity*>::iterator i = enemies.begin();i!= enemies.end();i++){
 		double dist = unit->pos.distance((*i)->pos);
@@ -150,6 +153,16 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 
 	Entity* newtarget = this->getTarget(enemies);
 
+	if(unit->entityType == SC_ZEALOT) {
+		if(unit->engine->distanceMgr->distance[unit->entityId.id][newtarget->entityId.id] < 25 * 75) {//TODO replace static number with some variable range
+			UnitAI* uai     = static_cast<UnitAI*>(unit->getAspect(UNITAI));
+			Potential3DMove* move = createPotential3DMoveForEnt(this->unit, newtarget->pos);
+			move->init();
+			uai->setCommand(move);
+		}
+
+		return;
+	}
 
 	//attack freeze
 	//for drone:
@@ -161,9 +174,9 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 	//if((unit->getType().groundWeapon().damageCooldown()-unit->getGroundWeaponCooldown()) < this->microparam.freeze){
 		return;
 	}*/
-	if(weapon->weaponType->damageCooldown() - weapon->m_cooldown < ((this->microparam.freeze * weapon->weaponType->damageCooldown()) / 2.0f)) {
+	/*if(weapon->weaponType->damageCooldown() - weapon->m_cooldown < ((this->microparam.freeze * weapon->weaponType->damageCooldown()) / 2.0f)) {
 		return;
-	}
+	}*/
 
 	//ready to attack
 	if(weapon->m_cooldown<=0){

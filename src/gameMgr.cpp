@@ -347,7 +347,7 @@ void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre:
 		location.y = 0;
 //		location.x -= 250;
 //		location.z -= 250;
-		createNEntitiesCircle(TURRET, startingNumberOfTurrets, side, player, location, 75);
+		createNEntitiesCircle(SC_ZEALOT, startingNumberOfTurrets, side, player, location, 75);
 
 		//createNEntitiesCircle(SC_VULTURE, 1, side, player, location, 5);
 		//createNEntitiesCircle(SC_VULTURE, 6, side, player, location,5);

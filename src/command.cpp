@@ -483,7 +483,7 @@ FastEcslent::Maintain::Maintain (Entity *ent, Target *tgt): UnitCommand(ent, Mai
 	}
 }
 bool FastEcslent::Maintain::valid(Entity *entity) {
-	return true;
+	return (entity != NULL);
 }
 
 inline bool FastEcslent::Maintain::done() {

@@ -23,6 +23,23 @@ using namespace FastEcslent;
 
 namespace FastEcslent {
 
+Maintain* createMaintainForEnt(Entity* ent, Entity* enemy) {
+	Target* t = new Target;
+	t->entity = enemy;
+	t->location = enemy->pos;
+	t->offset = Ogre::Vector3(0.0f, 0.0f ,0.0f);
+
+	Maintain* maintain = new Maintain(ent, t);
+	maintain->init();
+	return maintain;
+}
+
+void setMaintainForEnt(Entity* ent, Entity* enemy){
+	Maintain* mt = createMaintainForEnt(ent, enemy);
+	UnitAI* ai = dynamic_cast<UnitAI*> (ent->getAspect(UNITAI));
+	ai->setCommand(mt);
+}
+
 AttackMove *createAttackForEnt(Entity* ent, Entity* enemy){
 	Target* t = new Target;
 	t->entity = enemy;
@@ -83,9 +100,9 @@ Move3D *createMove3DForEnt(Entity* ent, Ogre::Vector3 pos, bool isKiting){
 	return m;
 }
     
-    Wait *createWaitForEnt(Entity* ent, double wtime){
+Wait *createWaitForEnt(Entity* ent, double wtime){
 	Target* t = new Target;
-        t->waitTime = wtime;
+		t->waitTime = wtime;
 	t->entity = 0;
 	t->location = Ogre::Vector3(0.0f, 0.0f, 0.0f);
 	t->offset   = Ogre::Vector3(0.0f, 0.0f, 0.0f);
