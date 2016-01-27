@@ -31,6 +31,7 @@ Wait* createWaitForEnt(Entity* ent, double wtime);
 Gather* createGatherForEntAndMineral(SCVehicle *scv, Entity *resource);
 PotentialMove *createPotentialMoveForEnt(Entity *ent, Ogre::Vector3 pos);
 Potential3DMove *createPotential3DMoveForEnt(Entity* ent, Ogre::Vector3 pos);
+Potential3DMove *createPotential3DMoveForEnt(Entity* ent, Entity* enemy);
 
 Maintain* createMaintainForEnt(Entity* ent, Entity* enemy);
 void setMaintainForEnt(Entity* ent, Entity* enemy);

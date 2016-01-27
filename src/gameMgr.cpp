@@ -330,7 +330,7 @@ void FastEcslent::GameMgr::makeTerrain(){
 
 void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre::Vector3 location, float offset, float yawOffset){
 	startingNumberOfDrones = 4;
-	startingNumberOfTurrets = 2;
+	startingNumberOfTurrets = 25;
 	//create Marine
 	if(side==RED){
 		location.y = 100;

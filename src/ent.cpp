@@ -116,7 +116,7 @@ void FastEcslent::Entity::init() {
 	for (int aType = 0; aType < NASPECTTYPES; aType++){ // the problem with enums in C++n
 		switch (aType){
 		case (PHYSICS):
-			if(this->entityType == DRONE)
+			if(this->entityType == DRONE || this->entityType ==  SC_ZEALOT)
 				physics = new Physics3D(this, PHYSICS);
 			else
 				physics = new Physics2D2(this, PHYSICS);

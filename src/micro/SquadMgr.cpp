@@ -108,6 +108,7 @@ void SquadMgr::onFrame(){
 		this->removeUnits();
 		this->setTarget();
 		this->refreshGroupPosition();
+
 		this->onFire();
 	}
 }

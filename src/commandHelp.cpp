@@ -167,6 +167,17 @@ Wait *createWaitForEnt(Entity* ent, double wtime){
 		return p3dm;
 	}
 
+	Potential3DMove* createPotential3DMoveForEnt(Entity* ent, Entity* enemy) {
+			Target* t = new Target;
+			t->entity = enemy;
+			t->location = enemy->pos;
+			t->offset = Ogre::Vector3(0.0f, 0.0f, 0.0f);
+
+			Potential3DMove* p3dm = new Potential3DMove(ent, t);
+			p3dm->init();
+			return p3dm;
+		}
+
 	void setDirectMoveForEnt(Entity *ent, Ogre::Vector3 pos, bool append) {
 		//can only control their own units.
 //		if(ent->engine->options.side != ent->entityId.side or ent->engine->options.player != ent->entityId.player )

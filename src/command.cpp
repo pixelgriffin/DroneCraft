@@ -143,11 +143,6 @@ Ogre::Vector3 FastEcslent::Move3D::computeRepulsor(){
 }
 
 void FastEcslent::Move3D::init(){
-	if(entity->entityType == DRONE)
-	{
-		//std::cout << "drone given 3D move to " << target->location.x << " " << target->location.y << " " << target->location.z << " @ " << entity->pos.x << " " << entity->pos.y << " " << entity->pos.z << std::endl;
-	}
-
 	Ogre::Vector3 diff = target->location - entity->pos;
 	entity->desiredHeading = -atan2(diff.z, diff.x);
 	entity->desiredSpeed = entity->maxSpeed;
@@ -298,12 +293,6 @@ inline bool FastEcslent::PotentialMove::done(){
 void FastEcslent::PotentialMove::init(){
 	Ogre::Vector3 diff = target->location - entity->pos;
 	entity->desiredSpeed = entity->maxSpeed;
-
-	if(entity->entityType == DRONE)
-	{
-		//std::cout << "entity given 2d potential" << std::endl;
-	}
-
 }
 
 inline void FastEcslent::PotentialMove::tick(double dt){
@@ -402,15 +391,17 @@ inline void FastEcslent::Potential3DMove::tick(double dt) {
 		for (int i = 0; i < nEnts; i++){
 			if(i != entity->entityId.id){// repulsed by all other entities
 				if (entity->engine->distanceMgr->distance[entity->entityId.id][i] < relevantDistanceThreshold) { // Don't care about entities too far away
-					nInRange += 1;
-					tmp = (entity->engine->distanceMgr->normalizedDistanceVec[i][entity->entityId.id]);
+					if(entity->entityId.side == entity->engine->entityMgr->ents[i]->entityId.side) {
+						nInRange += 1;
+						tmp = (entity->engine->distanceMgr->normalizedDistanceVec[i][entity->entityId.id]);
 
-					double val = entity->engine->distanceMgr->distance[entity->entityId.id][i];
-					if(val == 0)
-						val = 0.1;
+						double val = entity->engine->distanceMgr->distance[entity->entityId.id][i];
+						if(val == 0)
+							val = 0.1;
 
-					repulsivePotential =  (B * entity->engine->entityMgr->ents[i]->mass) / pow(val, m);
-					entity->potentialVec += (tmp * repulsivePotential);
+						repulsivePotential =  (B * entity->engine->entityMgr->ents[i]->mass) / pow(val, m);
+						entity->potentialVec += (tmp * repulsivePotential);
+					}
 				}
 			}
 		}

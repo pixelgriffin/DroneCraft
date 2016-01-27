@@ -36,7 +36,7 @@ IMEnemy3D* InfoMgr::getIMEnemy(Side s){
 
 void InfoMgr::init(){
 	this->frame = 0;
-	this->maxFrames = 3000;
+	this->maxFrames = 30000;
 	this->positiveFitnessFactor = 1000.0;
 	this->dt = 0;
 

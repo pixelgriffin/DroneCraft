@@ -34,7 +34,7 @@ void FastEcslent::Weapon::init(){
 
 	m_cooldown = 0;
 	if(this->entity->entityType == FastEcslent::SC_ZEALOT){
-		STANDSTILL = 8;
+		STANDSTILL = 0;//TODO NATHAN EDIT FROM 8
 	}else{
 		STANDSTILL = 0;
 	}
@@ -68,9 +68,6 @@ void FastEcslent::Weapon::tick(double dt) {
 			}else if(this->weaponType->explosionType() == FastEcslent::ExplosionTypes::Enemy_Line_Splash){
 				dealLineSplashDamageToTarget(target, dt, this->weaponType->outerSplashRadius(), this->weaponType->innerSplashRadius());                //line splash damage
 			}else {
-				if(this->entity->entityType == TURRET) {
-					//std::cout << "pew pew" << std::endl;
-				}
 				dealDamageToTarget(target, dt);
 			}
 		}
@@ -136,10 +133,6 @@ void FastEcslent::Weapon::dealLineSplashDamageToTarget(Target tgt, double dt, do
 }
 
 void FastEcslent::Weapon::takeDamage(double amt) {
-	if(this->entity->entityType == DRONE) {
-		//std::cout << "damage: " << amt << std::endl;
-	}
-
 	if (this->entity->entityState == FastEcslent::ALIVE) {
 		m_beingAttacked = BEINGATTACKED;
 		this->entity->hitpoints -= amt * armor;

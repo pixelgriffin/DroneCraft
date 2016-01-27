@@ -154,11 +154,9 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 	Entity* newtarget = this->getTarget(enemies);
 
 	if(unit->entityType == SC_ZEALOT) {
-		if(unit->engine->distanceMgr->distance[unit->entityId.id][newtarget->entityId.id] < 25 * 75) {//TODO replace static number with some variable range
-			UnitAI* uai     = static_cast<UnitAI*>(unit->getAspect(UNITAI));
-			Potential3DMove* move = createPotential3DMoveForEnt(this->unit, newtarget->pos);
-			move->init();
-			uai->setCommand(move);
+		if(unit->engine->distanceMgr->distance[unit->entityId.id][newtarget->entityId.id] < 28 * 75) {//TODO replace static number with some variable range
+			AttackMove3D* attack= createAttack3DForEnt(this->unit, newtarget);
+			ai->setCommand(attack);
 		}
 
 		return;
@@ -205,7 +203,7 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 			}
 
 			this->target = newtarget;
-			if(this->unit->entityType == DRONE) {
+			if(this->unit->entityType == DRONE || this->unit->entityType == SC_ZEALOT) {
 				AttackMove3D* attack= createAttack3DForEnt(this->unit, target);
 				ai->setCommand(attack);
 			} else {
@@ -239,7 +237,7 @@ void MicroAspect::kiteMove(set<Entity*> &enemies){
 
 	if(distance < tweapon->weaponType->maxRange() + this->microparam.kitingRange){
 		if(1 || tweapon->weaponType->maxRange() < uweapon->weaponType->maxRange()){
-			if(this->unit->entityType == DRONE)
+			if(this->unit->entityType == DRONE || this->unit->entityType == SC_ZEALOT)
 			{
 				//3D COMMAND
 				Potential3DMove* move = createPotential3DMoveForEnt(this->unit, kitingpos);
@@ -253,7 +251,7 @@ void MicroAspect::kiteMove(set<Entity*> &enemies){
 				uai->setCommand(move);
 			}
 		}else if(this->isBeingTarget(unit, enemies) && (this->getUnitHPPercent(unit) < this->microparam.hpkiting)){ //kiting only being targeted
-			if(this->unit->entityType == DRONE)
+			if(this->unit->entityType == DRONE || this->unit->entityType == SC_ZEALOT)
 			{
 				//3D COMMAND
 				Potential3DMove* move = createPotential3DMoveForEnt(this->unit, target->pos);
