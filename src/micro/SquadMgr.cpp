@@ -217,7 +217,7 @@ void SquadMgr::potentialMove(Entity* unit, Ogre::Vector3* target, int dist)
 
 double SquadMgr::getSquadScore()
 {
-	double f1 = fightScore();
+	/*double f1 = fightScore();
 	double f2 = moveScore();
 	double noMoveScore = ((this->engine->gameMgr->startingNumberOfDrones * this->engine->gameMgr->droneCost) -
 				(this->engine->gameMgr->startingNumberOfTurrets * this->engine->gameMgr->turretCost));
@@ -226,8 +226,28 @@ double SquadMgr::getSquadScore()
 
 	} else {
 		return f1;
+	}*/
+
+	int unitscore = 100;
+	double buffer = 1000;
+	int fu = this ->unitSet.size();
+	int eu = this->enemySet.size();
+	int du = fu - eu;
+
+	double score = du*unitscore;
+
+	double frame = this->im->getFrameCount();
+	//Time score is the within [0-1) * marine score
+	double timescore =  unitscore * (1 - frame/30000);    //250 is the set longest time in one game
+
+	if(score < 0) timescore *= -1;  //when the enemy win, time score is negative
+	score += timescore;
+
+	if(eu > 0 && fu > 0){    //didn't fight at all, punish
+		score -= eu* unitscore;
 	}
 
+	return score + buffer;
 }
 
 
