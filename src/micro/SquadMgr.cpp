@@ -217,7 +217,7 @@ void SquadMgr::potentialMove(Entity* unit, Ogre::Vector3* target, int dist)
 
 double SquadMgr::getSquadScore()
 {
-	/*double f1 = fightScore();
+	double f1 = fightScore();
 	double f2 = moveScore();
 	double noMoveScore = ((this->engine->gameMgr->startingNumberOfDrones * this->engine->gameMgr->droneCost) -
 				(this->engine->gameMgr->startingNumberOfTurrets * this->engine->gameMgr->turretCost));
@@ -226,9 +226,9 @@ double SquadMgr::getSquadScore()
 
 	} else {
 		return f1;
-	}*/
+	}
 
-	int unitscore = 100;
+	/*int unitscore = 100;
 	double buffer = 1000;
 	int fu = this ->unitSet.size();
 	int eu = this->enemySet.size();
@@ -247,7 +247,7 @@ double SquadMgr::getSquadScore()
 		score -= eu* unitscore;
 	}
 
-	return score + buffer;
+	return score + buffer;*/
 }
 
 

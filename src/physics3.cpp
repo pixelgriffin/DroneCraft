@@ -66,7 +66,8 @@ void FastEcslent::Physics3D::doHelmsman(double dt) {
 	//if(to.z < centimeters(25) && to.z > -centimeters(25))
 	//	return;
 
-	entity->pos = to;
+	if(!(this->entity->weapon->m_onfire > 0))
+		entity->pos = to;
 
 	DEBUG(std::cout << "Speed: " << entity->speed << ", XZ-Heading: " << entity->heading << std::endl <<std::endl;)
 

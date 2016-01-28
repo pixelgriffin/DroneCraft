@@ -34,7 +34,6 @@ namespace FastEcslent {
 
 		double      m_beingAttacked;
 
-		double      m_onfire;
 		bool        isAttacking;
 	public:
 		const WeaponType* weaponType;
@@ -42,7 +41,8 @@ namespace FastEcslent {
 		//double*      damageDone;
 		double      damageMultiplier;
 		double      m_cooldown;
-		int     	 STANDSTILL;
+		double      m_onfire;
+		double     	 STANDSTILL;
 
 		//double      hitpoints;
                 //double*      maxHitpoints;

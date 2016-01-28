@@ -33,8 +33,10 @@ void FastEcslent::Weapon::init(){
 	this->target.entity = 0;
 
 	m_cooldown = 0;
-	if(this->entity->entityType == FastEcslent::SC_ZEALOT){
-		STANDSTILL = 0;//TODO NATHAN EDIT FROM 8
+	if(this->entity->entityType == FastEcslent::SC_ZEALOT) {
+		STANDSTILL = 0.75f;
+	} else if(this->entity->entityType == FastEcslent::DRONE) {
+		STANDSTILL = 1;
 	}else{
 		STANDSTILL = 0;
 	}

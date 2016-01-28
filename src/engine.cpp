@@ -161,7 +161,7 @@ void FastEcslent::Engine::run(){
 		tickAll(fixedDt * speedup); // tick all managers
 
 		//update times
-		runTime += dt;
+		runTime += fixedDt * speedup;//dt;
 
 
 		/*
