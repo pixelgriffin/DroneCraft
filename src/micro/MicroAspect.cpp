@@ -24,7 +24,7 @@ MicroAspect::MicroAspect(Entity* u, SquadMgr* s, Side side){
 
 	microparam.freeze = params.m_freeze * (0.125f / 1.0f);
 	microparam.kitingRange = params.m_kitingRange * 32;
-	microparam.kitingDist = params.m_kitingDist*10;   //IM cell distance
+	microparam.kitingDist = params.m_kitingDist;   //IM cell distance
 	microparam.targetNearby = params.m_targetNearby*10;
 	microparam.hpfocus = params.m_hpfocus*0.14;
 	microparam.hpkiting = params.m_hpkiting*0.14; // change from 0.1 to get upper limit closer to 1.0
@@ -55,14 +55,15 @@ MicroAspect::MicroAspect(Entity* u, SquadMgr* s, Side side){
 
 //Target selection
 Entity* MicroAspect::getTarget(std::set<Entity*> &enemies){
-	Entity* t = getNearestUnit(enemies);
-	std::set<Entity*> nearbyunits;
+	Entity* t = getNearestUnit(enemies);//nearest enemy
+	std::set<Entity*> nearbyunits;//enemies nearby that enemy?
 	if(t == NULL)
 		return NULL;
 
 	for(int i=0;i<t->engine->entityMgr->nEnts;i++){
-		if(t->engine->entityMgr->ents[i]->entityId.side == this->side) continue;
-		else if(t->engine->entityMgr->ents[i]->entityState != ALIVE) continue;
+		if(t->engine->entityMgr->ents[i]->entityId.side == this->side) continue; //are they us?
+		else if(t->engine->entityMgr->ents[i]->entityState != ALIVE) continue; //are they alive?
+		else if(t->engine->distanceMgr->distance[t->entityId.id][i] < this->microparam.targetNearby) continue; //are they near that enemy?
 		else{
 			nearbyunits.insert(t->engine->entityMgr->ents[i]);
 		}
