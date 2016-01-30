@@ -154,7 +154,7 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 
 	Entity* newtarget = this->getTarget(enemies);
 
-	if(unit->entityType == SC_ZEALOT) {
+	if(unit->entityId.side == BLUE) {
 		if(unit->engine->distanceMgr->distance[unit->entityId.id][newtarget->entityId.id] < 28 * 75) {//TODO replace static number with some variable range
 			AttackMove3D* attack= createAttack3DForEnt(this->unit, newtarget);
 			ai->setCommand(attack);
@@ -237,7 +237,7 @@ void MicroAspect::kiteMove(set<Entity*> &enemies){
 	Weapon* tweapon = static_cast<Weapon*>(target->getAspect(WEAPON));
 
 	if(distance < tweapon->weaponType->maxRange() + this->microparam.kitingRange){
-		if(1 || tweapon->weaponType->maxRange() < uweapon->weaponType->maxRange()){
+		if(tweapon->weaponType->maxRange() < uweapon->weaponType->maxRange()){
 			if(this->unit->entityType == DRONE || this->unit->entityType == SC_ZEALOT)
 			{
 				//3D COMMAND

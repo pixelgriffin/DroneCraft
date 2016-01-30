@@ -303,7 +303,7 @@ double SquadMgr::fightScore(){
 
 	score = friendFitness - enemyFitness;
 
-	score += (engine->gameMgr->startingNumberOfTurrets - this->enemySet.size()) * (1.0 - this->im->getFrameCount()/this->im->maxFrames);
+	score += (engine->gameMgr->startingNumberOfTurrets - this->enemySet.size()) * (1.0 - (this->im->getFrameCount() * engine->options.speedup)/(double)this->im->maxFrames);
 
 ////	score += (uhp/umhp + (1 - ehp/emhp)) * 100;
 //
