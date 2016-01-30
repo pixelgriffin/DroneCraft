@@ -83,7 +83,8 @@ void FastEcslent::Weapon::tick(double dt) {
 
 		this->target.entity = 0;
 	}else if(m_cooldown >=0){
-		m_cooldown -= dt;
+		if(m_onfire <= 0)
+			m_cooldown -= dt;
 	}
 
 	//if the target is dead, reset the target
