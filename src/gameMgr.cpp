@@ -329,6 +329,8 @@ void FastEcslent::GameMgr::makeTerrain(){
 }
 
 void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre::Vector3 location, float offset, float yawOffset){
+	//good DvZ: 12,16,20,20,2,2,0,13,12,13,3,2
+	//?
 	startingNumberOfDrones = 4;
 	startingNumberOfTurrets = 4;
 	//create Marine
@@ -344,7 +346,7 @@ void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre:
 //		location.z -= 350;
 		//location.y = 0;
 //		createNEntitiesCircle(DRONE, 6, side, player, location, 5);
-		location.y = 0;
+		location.y = 100;
 //		location.x -= 250;
 //		location.z -= 250;
 		createNEntitiesCircle(DRONE, startingNumberOfTurrets, side, player, location, 5);

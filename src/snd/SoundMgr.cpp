@@ -377,6 +377,8 @@ bool SoundMgr::playExplosionSound(FastEcslent::EntityType et, OgreGFX::GFXNode *
 bool SoundMgr::playExplosionSound(OgreGFX::GFXNode *gfxNode){
         Ogre::Vector3 pos = gfxNode->node->getPosition();
         
+        return false;
+
         if (this->playAudio(battleSoundSource, true)){
                 return setSoundPosition(battleSoundSource, pos);
         }

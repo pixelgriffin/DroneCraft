@@ -154,14 +154,14 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 
 	Entity* newtarget = this->getTarget(enemies);
 
-	if(unit->entityId.side == BLUE) {
+	/*if(unit->entityId.side == BLUE) {
 		if(unit->engine->distanceMgr->distance[unit->entityId.id][newtarget->entityId.id] < 28 * 75) {//TODO replace static number with some variable range
 			AttackMove3D* attack= createAttack3DForEnt(this->unit, newtarget);
 			ai->setCommand(attack);
 		}
 
 		return;
-	}
+	}*/
 
 	//attack freeze
 	//for drone:
