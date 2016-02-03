@@ -152,16 +152,34 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 	Weapon* weapon = static_cast<Weapon*>(unit->getAspect(WEAPON));
 	UnitAI* ai     = static_cast<UnitAI*>(unit->getAspect(UNITAI));
 
-	Entity* newtarget = this->getTarget(enemies);
+	if(unit->entityId.side == BLUE) {
+		Entity* ourtarget = NULL;
+		double minDist = 100000;
 
-	/*if(unit->entityId.side == BLUE) {
-		if(unit->engine->distanceMgr->distance[unit->entityId.id][newtarget->entityId.id] < 28 * 75) {//TODO replace static number with some variable range
-			AttackMove3D* attack= createAttack3DForEnt(this->unit, newtarget);
+		for(int i = 0; i < unit->engine->entityMgr->nEnts; i++) {
+			if(unit->engine->entityMgr->ents[i]->entityId.side == RED) {
+				if(ourtarget == NULL) {
+					ourtarget = unit->engine->entityMgr->ents[i];
+					minDist = unit->pos.distance(ourtarget->pos);
+				} else {
+					double tempDist = unit->pos.distance(unit->engine->entityMgr->ents[i]->pos);
+					if(tempDist < minDist) {
+						ourtarget = unit->engine->entityMgr->ents[i];
+						minDist = tempDist;
+					}
+				}
+			}
+		}
+
+		if(unit->engine->distanceMgr->distance[unit->entityId.id][ourtarget->entityId.id] < 28 * 75) {//TODO replace static number with some variable range
+			AttackMove3D* attack= createAttack3DForEnt(this->unit, ourtarget);
 			ai->setCommand(attack);
 		}
 
 		return;
-	}*/
+	}
+
+	Entity* newtarget = this->getTarget(enemies);
 
 	//attack freeze
 	//for drone:
@@ -173,9 +191,9 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 	//if((unit->getType().groundWeapon().damageCooldown()-unit->getGroundWeaponCooldown()) < this->microparam.freeze){
 		return;
 	}*/
-	/*if(weapon->weaponType->damageCooldown() - weapon->m_cooldown < ((this->microparam.freeze * weapon->weaponType->damageCooldown()) / 2.0f)) {
+	if(weapon->weaponType->damageCooldown() - weapon->m_cooldown < ((this->microparam.freeze * weapon->weaponType->damageCooldown()) / 2.0f)) {
 		return;
-	}*/
+	}
 
 	//ready to attack
 	if(weapon->m_cooldown<=0){

@@ -332,7 +332,7 @@ void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre:
 	//good DvZ: 12,16,20,20,2,2,0,13,12,13,3,2
 	//?
 	startingNumberOfDrones = 4;
-	startingNumberOfTurrets = 4;
+	startingNumberOfTurrets = 25;
 	//create Marine
 	if(side==RED){
 		location.y = 100;
@@ -349,7 +349,7 @@ void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre:
 		location.y = 100;
 //		location.x -= 250;
 //		location.z -= 250;
-		createNEntitiesCircle(DRONE, startingNumberOfTurrets, side, player, location, 5);
+		createNEntitiesCircle(SC_ZEALOT, startingNumberOfTurrets, side, player, location, 5);
 
 		//createNEntitiesCircle(SC_VULTURE, 1, side, player, location, 5);
 		//createNEntitiesCircle(SC_VULTURE, 6, side, player, location,5);
