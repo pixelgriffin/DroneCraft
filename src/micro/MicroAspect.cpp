@@ -171,7 +171,7 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 			}
 		}
 
-		if(unit->engine->distanceMgr->distance[unit->entityId.id][ourtarget->entityId.id] < 28 * 75) {//TODO replace static number with some variable range
+		if(unit->engine->distanceMgr->distance[unit->entityId.id][ourtarget->entityId.id] < unit->seekRange) {
 			AttackMove3D* attack= createAttack3DForEnt(this->unit, ourtarget);
 			ai->setCommand(attack);
 		}
