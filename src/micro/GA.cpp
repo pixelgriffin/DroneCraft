@@ -40,25 +40,48 @@ IMParams GA::getBaselineParams()
 {
 	//12,16,20,20,2,2,0,13,12,13,3,2
 	//old: 26, 16, 46, 4, 5, 2, 0, 8, 3, 30, 0, 4
+	//9260: 14,10,60,13,10,3,2,22,14,4,7,1
+
 
 	IMParams param;
-	param.UnitValue      = 12;
+	param.UnitValue      = 26;
 	param.UnitRadius     = 16;
 	//param.TerrainValue   = 3;
 	//param.TerrainRadius  = 10;
 
-	param.A = 20;
-	param.B = 2;
+	param.A = 46;
+	param.B = 4;
 
-	param.m = 20;
+	param.m = 5;
 	param.n = 2;
 
 	param.m_freeze      = 0;
-	param.m_kitingRange = 13;
-	param.m_targetNearby= 12;
-	param.m_kitingDist  = 13;
-	param.m_hpfocus     = 3;
-	param.m_hpkiting    = 2;
+	param.m_kitingRange = 8;
+	param.m_targetNearby= 3;
+	param.m_kitingDist  = 30;
+	param.m_hpfocus     = 0;
+	param.m_hpkiting    = 4;
+
+/*
+	IMParams param;
+	param.UnitValue      = 14;
+	param.UnitRadius     = 10;
+	//param.TerrainValue   = 3;
+	//param.TerrainRadius  = 10;
+
+	param.A = 60;
+	param.B = 13;
+
+	param.m = 10;
+	param.n = 3;
+
+	param.m_freeze      = 2;
+	param.m_kitingRange = 22;
+	param.m_targetNearby= 14;
+	param.m_kitingDist  = 4;
+	param.m_hpfocus     = 7;
+	param.m_hpkiting    = 1;
+*/
 
 	return param;
 }

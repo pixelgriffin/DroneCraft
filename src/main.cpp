@@ -104,7 +104,7 @@ Options makeOptions(int argc, char*argv[]){
 	options.enableGfx = true;
 	options.runDebugTests = false;
 
-	options.speedup = 1.0; //300.0; //10.0;
+	options.speedup = 5.0; //300.0; //10.0;
     
     options.levelType = _64x64;
 
@@ -114,6 +114,8 @@ Options makeOptions(int argc, char*argv[]){
 
 int main(int argc, char *argv[]){
 //	srandom(time(NULL));
+	//srandom(atoi(argv[2]));
+	//std::cout << atoi(argv[2]) << std::endl;
 	srandom(1);
 	pair<IMParams, IMParams> microparams = makeParams(argc, argv);
 	GA::getInstance()->setParams(microparams.first, microparams.second);

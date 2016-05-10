@@ -152,7 +152,7 @@ void MicroAspect::onFire(set<Entity*> &enemies){
 	Weapon* weapon = static_cast<Weapon*>(unit->getAspect(WEAPON));
 	UnitAI* ai     = static_cast<UnitAI*>(unit->getAspect(UNITAI));
 
-	if(unit->entityId.side == BLUE) {
+	if(unit->entityType == SC_ZEALOT && unit->entityId.side == BLUE) {
 		Entity* ourtarget = NULL;
 		double minDist = 100000;
 

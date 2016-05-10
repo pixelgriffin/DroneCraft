@@ -172,7 +172,7 @@ namespace FastEcslent {
 	public:
 
 		SC_Zealot(Engine *eng) : Entity(eng, SC_ZEALOT) {
-			meshName = "scv.mesh";
+			meshName = "banshee.mesh";
 			uiname = "Zealot.";
 			uiname.append(boost::lexical_cast<std::string>(count++));
 
@@ -194,7 +194,7 @@ namespace FastEcslent {
 
 			hitpoints = 160;
 			hitpointsmax = 160;
-			seekRange = 224*2;
+			seekRange = 10000; //224*2;
 		}
 	};
 }

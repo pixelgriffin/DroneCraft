@@ -381,7 +381,11 @@ void FastEcslent::Potential3DMove::init(){
 
 inline void FastEcslent::Potential3DMove::tick(double dt) {
 	int nEnts = entity->engine->entityMgr->nEnts;
-	float relevantDistanceThreshold = 100.0f;
+	float relevantDistanceThreshold;// = 100.0f;
+	if (this->entity->entityType == SC_ZEALOT)
+		relevantDistanceThreshold = 50.0f;
+	else
+		relevantDistanceThreshold = 100.0f;
 	if (!done()){
 		// compute force
 		double repulsivePotential = 0.0f;

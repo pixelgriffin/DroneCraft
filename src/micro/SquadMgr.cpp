@@ -217,37 +217,93 @@ void SquadMgr::potentialMove(Entity* unit, Ogre::Vector3* target, int dist)
 
 double SquadMgr::getSquadScore()
 {
-	double f1 = fightScore();
-	double f2 = moveScore();
-	double noMoveScore = ((this->engine->gameMgr->startingNumberOfDrones * this->engine->gameMgr->droneCost) -
-				(this->engine->gameMgr->startingNumberOfTurrets * this->engine->gameMgr->turretCost));
-	if(closeTo(f1, noMoveScore+1000)){
-		return 2000-f2;
+		// SCENARIO B
 
-	} else {
-		return f1;
+		double score;
+
+		score = (engine->gameMgr->startingNumberOfTurrets - this->enemySet.size()) * 160.0f; //100;
+
+			cout << "Enemies remain: " << (this->enemySet.size()) << endl;
+			cout << "Friendlies remain: " << (this->unitSet.size()) << endl;
+
+			/*if (this->enemySet.size() == 0)
+				score += this->unitSet.size() * 100;
+
+			else
+				score += this->unitSet.size() * 10;*/
+
+		double hp = 0.;
+
+		for (set<Entity*>::iterator i = this->enemySet.begin(); i != this->enemySet.end(); i++)
+		{
+		  Entity* t = *i;
+		  hp += (t->hitpointsmax - t->hitpoints);
+		}
+
+		for (set<Entity*>::iterator i = this->unitSet.begin(); i != this->unitSet.end(); i++)
+		{
+		  Entity* t = *i;
+		  hp += (400.0f * t->hitpoints/t->hitpointsmax);
+		}
+
+		return (score+hp);
+
+	// Scenario C v.2
+
+	/*double score;
+
+	score = (engine->gameMgr->startingNumberOfDrones - this->enemySet.size()) * 160.0f; //100;
+
+	double hp = 0.;
+
+	for (set<Entity*>::iterator i = this->enemySet.begin(); i != this->enemySet.end(); i++)
+	{
+	  Entity* t = *i;
+	  hp += (t->hitpointsmax - t->hitpoints);
 	}
 
-	/*int unitscore = 100;
-	double buffer = 1000;
-	int fu = this ->unitSet.size();
-	int eu = this->enemySet.size();
-	int du = fu - eu;
-
-	double score = du*unitscore;
-
-	double frame = this->im->getFrameCount();
-	//Time score is the within [0-1) * marine score
-	double timescore =  unitscore * (1 - frame/30000);    //250 is the set longest time in one game
-
-	if(score < 0) timescore *= -1;  //when the enemy win, time score is negative
-	score += timescore;
-
-	if(eu > 0 && fu > 0){    //didn't fight at all, punish
-		score -= eu* unitscore;
+	if (this->enemySet.size() == 0)
+	{
+		for (set<Entity*>::iterator i = this->unitSet.begin(); i != this->unitSet.end(); i++)
+		{
+		  Entity* t = *i;
+		  hp += (160.0f * t->hitpoints/t->hitpointsmax);
+		}
 	}
 
-	return score + buffer;*/
+	return (score+hp);*/
+
+		//SCENARIO C
+		/*double score;
+
+		score = (engine->gameMgr->startingNumberOfDrones - this->enemySet.size()) * 100.0f;
+
+		if (this->enemySet.size() == 0)
+			score += this->unitSet.size() * 100;
+
+		else
+			score += this->unitSet.size() * 10;
+
+		return score;*/
+
+	/*double score;
+		double friendFitness = 0.0;
+		for (set<Entity*>::iterator i = this->unitSet.begin(); i != this->unitSet.end(); i++)
+		{
+		  Entity* t = *i;
+		  friendFitness += (this->engine->gameMgr->droneCost * t->hitpoints/t->hitpointsmax);
+		}
+		double enemyFitness = 0.0f;
+		for (set<Entity*>::iterator i = this->enemySet.begin(); i != this->enemySet.end(); i++)
+			{
+			  Entity* t = *i;
+			  enemyFitness += (this->engine->gameMgr->turretCost * (t->hitpoints/t->hitpointsmax));
+			}
+
+		score = friendFitness - enemyFitness;
+
+
+	 	return score + 1000;*/
 }
 
 

@@ -277,11 +277,134 @@ void FastEcslent::GameMgr::StarCraft(){
 		this->playerNEnts[i] = 0;
 	}
 
+
+	int randCornerRed = 3;//random() % 8; //3
+	int randCornerBlue = 0;//random() % 8; //0
+
+	while (randCornerRed == randCornerBlue)
+		randCornerBlue = random() % 8;
+
+	int redX, redY, redZ;
+	int blueX, blueY, blueZ;
+
+
+	if (randCornerRed == 0)
+	{
+		redX = 400;
+		redY = 100;
+		redZ = 400;
+	}
+
+	else if (randCornerRed == 1)
+	{
+		redX = 1648;
+		redY = 100;
+		redZ = 400;
+	}
+
+	else if (randCornerRed == 2)
+	{
+		redX = 400;
+		redY = 100;
+		redZ = 1648;
+	}
+
+	else if (randCornerRed == 3)
+	{
+		redX = 1648;
+		redY = 100;
+		redZ = 1648;
+	}
+
+	else if (randCornerRed == 4)
+	{
+		redX = 400;
+		redY = 1948;
+		redZ = 400;
+	}
+
+	else if (randCornerRed == 5)
+	{
+		redX = 1648;
+		redY = 1948;
+		redZ = 400;
+	}
+
+	else if (randCornerRed == 6)
+	{
+		redX = 400;
+		redY = 1948;
+		redZ = 1648;
+	}
+
+	else if (randCornerRed == 7)
+	{
+		redX = 1648;
+		redY = 1948;
+		redZ = 1648;
+	}
+
+	if (randCornerBlue == 0)
+	{
+		blueX = 400;
+		blueY = 100;
+		blueZ = 400;
+	}
+
+	else if (randCornerBlue == 1)
+	{
+		blueX = 1648;
+		blueY = 100;
+		blueZ = 400;
+	}
+
+	else if (randCornerBlue == 2)
+	{
+		blueX = 400;
+		blueY = 100;
+		blueZ = 1648;
+	}
+
+	else if (randCornerBlue == 3)
+	{
+		blueX = 1648;
+		blueY = 100;
+		blueZ = 1648;
+	}
+
+	else if (randCornerBlue == 4)
+	{
+		blueX = 400;
+		blueY = 1948;
+		blueZ = 400;
+	}
+
+	else if (randCornerBlue == 5)
+	{
+		blueX = 1648;
+		blueY = 1948;
+		blueZ = 400;
+	}
+
+	else if (randCornerBlue == 6)
+	{
+		blueX = 400;
+		blueY = 1948;
+		blueZ = 1648;
+	}
+
+	else if (randCornerBlue == 7)
+	{
+		blueX = 1648;
+		blueY = 1948;
+		blueZ = 1648;
+	}
+
 	float offset = 400.0f;
 //	makeArmyForSidePlayer(RED, ONE, Ogre::Vector3(offset, 0, offset), 250.0f, 0.06f);
 //	makeArmyForSidePlayer(BLUE, THREE, Ogre::Vector3(offset*4, 0, offset*4), 250.0f, 0.06f);
-	makeArmyForSidePlayer(RED, ONE, Ogre::Vector3(400, 100, 400), 250.0f, 0.06f);
-	makeArmyForSidePlayer(BLUE, THREE, Ogre::Vector3(1648, 100, 1648), 250.0f, 0.06f);
+	makeArmyForSidePlayer(RED, ONE, Ogre::Vector3(/*0,100,0*//*400, 100, 400*/redX,redY,redZ), 250.0f, 0.06f);
+	makeArmyForSidePlayer(BLUE, THREE, Ogre::Vector3(/*0,100,0*//*1648, 100, 1648*/blueX,blueY,blueZ), 250.0f, 0.06f);
 	//makeTerrain();
 	//makeBaseForSidePlayer(YELLOW, THREE, Ogre::Vector3(-offset, 0, offset), 550.0f, 0.06f);
 	//makeBaseForSidePlayer(GREEN, FOUR, Ogre::Vector3(offset, 0, -offset), 550.0f, 0.06f);
@@ -329,27 +452,82 @@ void FastEcslent::GameMgr::makeTerrain(){
 }
 
 void FastEcslent::GameMgr::makeArmyForSidePlayer(Side side, Player player, Ogre::Vector3 location, float offset, float yawOffset){
-	//good DvZ: 12,16,20,20,2,2,0,13,12,13,3,2
-	//?
-	startingNumberOfDrones = 4;
-	startingNumberOfTurrets = 25;
+	startingNumberOfDrones = 8;
+	startingNumberOfTurrets = 100;
 	//create Marine
 	if(side==RED){
-		location.y = 100;
+		/*for(int i = 0; i < startingNumberOfDrones; i++)
+		{
+			location.x = random() % 2048;
+			location.y = random() % 2048;
+			location.z = random() % 2048;
+			//std::cout << location.x << ", " << location.z<<std::endl;
+
+			createNEntitiesCircle(DRONE, 1, side, player, location, 1);
+			//createNEntitiesCircle(SC_ZEALOT, 1, side, player, location, 1);
+		}*/
+
+		//location.x = random() % 2048;
+		//location.y = random() % 2048;
+		//location.z = random() % 2048;
+
+		//createNEntitiesCircle(SC_ZEALOT, startingNumberOfTurrets, side, player, location, 5);
+
+		location.x = 1948;
+		location.z = 1948;
+
 		createNEntitiesCircle(DRONE, startingNumberOfDrones, side, player, location, 5);
-		//location.x += 1350;
-		//location.z += 1350;
-		//createNEntitiesCircle(DRONE, 3, side, player, location, 5);
+
+//				location.x = 1948;
+//				location.z = 1948;
+//				createNEntitiesCircle(DRONE, startingNumberOfDrones/2, side, player, location, 5);
+//				location.x = 100;
+//				location.z = 100;
+//				createNEntitiesCircle(DRONE, startingNumberOfDrones/2, side, player, location, 5);
+//				location.x = 1848;
+//				location.z = 200;
+//				createNEntitiesCircle(DRONE, startingNumberOfDrones/4, side, player, location, 5);
+//				location.x = 200;
+//				location.z = 1848;
+//				createNEntitiesCircle(DRONE, startingNumberOfDrones/4, side, player, location, 5);
+
+
+
 	}else{
-		//location.y = 100;
-//		location.x -= 350;
-//		location.z -= 350;
-		//location.y = 0;
-//		createNEntitiesCircle(DRONE, 6, side, player, location, 5);
-		location.y = 100;
-//		location.x -= 250;
-//		location.z -= 250;
+		/*for(int i = 0; i < startingNumberOfTurrets; i++)
+		{
+			location.x = random() % 2048;
+			location.y = random() % 2048;
+			location.z = random() % 2048;
+			//std::cout << location.x << ", " << location.z<<std::endl;
+
+			//createNEntitiesCircle(SC_ZEALOT, 1, side, player, location, 1);
+			createNEntitiesCircle(DRONE, 1, side, player, location, 1);
+		}*/
+
+		//location.x = random() % 2048;
+		//location.y = random() % 2048;
+		//location.z = random() % 2048;
+
+		//createNEntitiesCircle(DRONE, startingNumberOfDrones, side, player, location, 5);
+
+//				location.x = 1024;
+//				location.z = 1024;
+
 		createNEntitiesCircle(SC_ZEALOT, startingNumberOfTurrets, side, player, location, 5);
+
+				//		location.x = 1648;
+				//		location.z = 1648;
+				//		createNEntitiesCircle(SC_ZEALOT, 12, side, player, location, 5);
+				//		location.x = 400;
+				//		location.z = 400;
+				//		createNEntitiesCircle(SC_ZEALOT, 12, side, player, location, 5);
+				//		location.x = 1648;
+				//		location.z = 400;
+				//		createNEntitiesCircle(SC_ZEALOT, 13, side, player, location, 5);
+				//		location.x = 400;
+				//		location.z = 1648;
+				//		createNEntitiesCircle(SC_ZEALOT, 13, side, player, location, 5);
 
 		//createNEntitiesCircle(SC_VULTURE, 1, side, player, location, 5);
 		//createNEntitiesCircle(SC_VULTURE, 6, side, player, location,5);
@@ -364,7 +542,7 @@ std::vector<FastEcslent::Entity*> FastEcslent::GameMgr::createNEntitiesRadial(En
 	Entity *ent;
 	Ogre::Vector3 entityLocation;
 	if(entType == DRONE)
-		entityLocation = Ogre::Vector3(location.x, 100, location.z);
+		entityLocation = Ogre::Vector3(location.x, location.y, location.z);
 	else
 		entityLocation = Ogre::Vector3(location.x, 0, location.z);
 	float radius = entityLocation.length();
